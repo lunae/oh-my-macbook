@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# script/setup: Install all dependencies
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "> Bootstrap starting."
+
+command -v brew >/dev/null 2>&1 || {
+  echo "=> Homebrew is required!"
+  echo "==> Visit https://brew.sh/ for installation instructions."
+  exit 1
+}
+
+BREWFILE=${BREWFILE:-Brewfile}
+
+if [ -f "$BREWFILE" ] && [ "$(uname -s)" = "Darwin" ]; then
+  brew bundle check >/dev/null 2>&1  || {
+    echo "=> Installing Homebrew packages defined in $BREWFILE"
+    brew bundle
+  }
+fi
+
+echo "> Bootstrap complete."

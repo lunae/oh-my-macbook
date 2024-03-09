@@ -1,8 +1,0 @@
-cask 'iterm2'
-brew 'git'
-brew 'tree'
-brew 'jq'
-brew 'yq'
-brew 'wget'
-brew 'awscli'
-brew 'tldr'

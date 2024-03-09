@@ -2,7 +2,12 @@
 
 My configurations and scripts for MacOS
 
-## Homebrew
+## Setup
 
-1. Install [Homebrew](https://brew.sh/)
-2. `brew bundle`
+```shell
+./script/setup
+```
+
+## TODO
+
+* Install and configure ZSH
