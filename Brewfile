@@ -12,6 +12,7 @@ brew 'tgenv'
 brew 'tree'
 brew 'wget'
 brew 'yq'
+brew 'zsh'
 
 cask 'alfred'
 cask 'brave-browser'

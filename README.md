@@ -10,4 +10,4 @@ My configurations and scripts for MacOS
 
 ## TODO
 
-* Install and configure ZSH
+* Configure Oh My Zsh

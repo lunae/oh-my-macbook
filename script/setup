@@ -1,26 +1,23 @@
 #!/bin/sh
 
-# script/setup: Install all dependencies
+# script/setup: First time setup
 
 set -e
 
 cd "$(dirname "$0")/.."
 
-echo "> Bootstrap starting."
-
-command -v brew >/dev/null 2>&1 || {
-  echo "=> Homebrew is required!"
-  echo "==> Visit https://brew.sh/ for installation instructions."
-  exit 1
+make_zsh_default_shell() {
+  command -v zsh >/dev/null 2>&1 && ! [ "$SHELL" = "$(command -v zsh)" ] && {
+    echo "=> Make ZSH the default shell."
+    chsh -s "$(command -v zsh)"
+  }
 }
 
-BREWFILE=${BREWFILE:-Brewfile}
+setup() {
+  echo "> Setup starting."
+  script/bootstrap
+  make_zsh_default_shell
+  echo "> Setup complete."
+}
 
-if [ -f "$BREWFILE" ] && [ "$(uname -s)" = "Darwin" ]; then
-  brew bundle check >/dev/null 2>&1  || {
-    echo "=> Installing Homebrew packages defined in $BREWFILE"
-    brew bundle
-  }
-fi
-
-echo "> Bootstrap complete."
+setup
