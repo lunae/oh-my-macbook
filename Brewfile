@@ -1,31 +1,37 @@
-brew 'awscli'
-brew 'gh'
-brew 'git'
-brew 'hadolint'
-brew 'httpie'
+# Utility CLI Tools
 brew 'jq'
-brew 'kubernetes-cli'
-brew 'minikube'
-brew 'mkcert'
-brew 'nvm'
-brew 'sops'
-brew 'tfenv'
-brew 'tgenv'
 brew 'tree'
 brew 'wget'
-brew 'yq'
 brew 'zsh'
-
-cask 'alfred'
-cask 'brave-browser'
-cask 'caffeine'
-cask 'google-chrome'
 cask 'iterm2'
-cask 'jetbrains-toolbox'
-cask 'joplin'
+
+# Infrastructure CLI Tools
+brew 'awscli'
+brew 'kubernetes-cli'
+brew 'tfenv'
+brew 'tgenv'
+cask 'orbstack'
+
+# Productivity
+cask 'alfred'
+cask 'caffeine'
+cask 'obsidian'
+
+# Documentation
 cask 'kap'
-cask 'ngrok'
-cask 'pomatez'
-cask 'postman'
 cask 'ticktick'
-cask 'visual-studio-code'
+
+# Browsers
+cask 'brave-browser'
+cask 'google-chrome'
+
+# Development
+cask 'jetbrains-toolbox'
+cask 'visual-studio-code' 
+cask 'postman'
+brew 'gh'
+brew 'git'
+brew 'git-extras'
+brew 'httpie'
+brew 'nvm'
+cask 'boop'
