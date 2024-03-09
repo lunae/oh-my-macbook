@@ -1,4 +1,5 @@
 brew 'awscli'
+brew 'gh'
 brew 'git'
 brew 'hadolint'
 brew 'jq'
@@ -16,6 +17,7 @@ brew 'zsh'
 
 cask 'alfred'
 cask 'brave-browser'
+cask 'caffeine'
 cask 'google-chrome'
 cask 'iterm2'
 cask 'jetbrains-toolbox'
