@@ -1,13 +1,16 @@
-# macos-setup
+# oh-my-macbook
 
-My configurations and scripts for MacOS
+My configurations and setup scripts for MacOS
 
 ## Setup
 
-```shell
-./script/setup
-```
+* Run setup: `./script/setup`
+* Install [Oh My Zsh](https://ohmyz.sh/)
+* Update `ZSH_CUSTOM` in `.zshrc` to point to `oh-my-zsh` of this repository.
+* Update `plugins` to include the any of the provided plugins in this repository.
 
-## TODO
+## To Do
 
-* Configure Oh My Zsh
+* Automate installing Oh-My-Zsh!
+* Automate updating `ZSH_CUSTOM`
+* Automate updating `plugins` in `.zshrc`
