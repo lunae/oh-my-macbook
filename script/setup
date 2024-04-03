@@ -7,16 +7,40 @@ set -e
 cd "$(dirname "$0")/.."
 
 make_zsh_default_shell() {
+  zsh_path=$(command -v zsh)
+  
+  if [ -z "$zsh_path" ]; then
+    echo "Homebrew ZSH is not installed. Please install zsh before adding it to shells."
+    return 1
+  fi
+
+  if grep -q "^$zsh_path" /etc/shells; then
+    echo "Homebrew ZSH is already listed in /etc/shells."
+  else
+    echo "$zsh_path" | sudo tee -a /etc/shells
+    echo "Homebrew ZSH has been added to /etc/shells."
+  fi
+
   command -v zsh >/dev/null 2>&1 && ! [ "$SHELL" = "$(command -v zsh)" ] && {
     echo "=> Make ZSH the default shell."
     chsh -s "$(command -v zsh)"
   }
 }
 
+install_oh_my_zsh() {
+  if [ ! -d ~/.oh-my-zsh ]; then
+    echo "Oh My Zsh is not installed. Installing..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  else
+    echo "Oh My Zsh is already installed."
+  fi
+}
+
 setup() {
   echo "> Setup starting."
   script/bootstrap
   make_zsh_default_shell
+  install_oh_my_zsh
   echo "> Setup complete."
 }
 
