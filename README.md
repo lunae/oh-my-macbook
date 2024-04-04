@@ -11,6 +11,5 @@ My configurations and setup scripts for MacOS
 
 ## To Do
 
-* Automate installing Oh-My-Zsh!
 * Automate updating `ZSH_CUSTOM`
 * Automate updating `plugins` in `.zshrc`
