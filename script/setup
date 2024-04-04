@@ -10,30 +10,46 @@ make_zsh_default_shell() {
   zsh_path=$(command -v zsh)
   
   if [ -z "$zsh_path" ]; then
-    echo "Homebrew ZSH is not installed. Please install zsh before adding it to shells."
+    echo "=> Homebrew ZSH is not installed. Please install zsh before adding it to shells."
     return 1
   fi
 
   if grep -q "^$zsh_path" /etc/shells; then
-    echo "Homebrew ZSH is already listed in /etc/shells."
+    echo "=> Homebrew ZSH is already listed in /etc/shells."
   else
     echo "$zsh_path" | sudo tee -a /etc/shells
-    echo "Homebrew ZSH has been added to /etc/shells."
+    echo "=> Homebrew ZSH has been added to /etc/shells."
   fi
 
-  command -v zsh >/dev/null 2>&1 && ! [ "$SHELL" = "$(command -v zsh)" ] && {
+  if ! [ "$SHELL" = "$zsh_path" ]; then
     echo "=> Make ZSH the default shell."
     chsh -s "$(command -v zsh)"
-  }
+  else
+    echo "=> ZSH already the default shell."
+  fi
 }
 
 install_oh_my_zsh() {
   if [ ! -d ~/.oh-my-zsh ]; then
-    echo "Oh My Zsh is not installed. Installing..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    echo "=> Oh My Zsh is not installed. Installing..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo "=> Installed Oh My Zsh."
   else
-    echo "Oh My Zsh is already installed."
+    echo "=> Oh My Zsh is already installed."
   fi
+}
+
+configure_oh_my_zsh() {
+  new_zsh_custom_path="\"$(cd "$(dirname "$0")/../oh-my-zsh" && pwd)\""
+
+  if [ ! -f ~/.zshrc ]; then
+    echo "=> ~/.zshrc does not exist. Skipping configuring Oh My Zsh."
+    return 1
+  fi
+
+  sed -i '.bak' -e "s#^.*\(ZSH_CUSTOM=\).*#\1$new_zsh_custom_path#" ~/.zshrc
+
+  echo "=> ZSH_CUSTOM path updated successfully."
 }
 
 setup() {
@@ -41,6 +57,7 @@ setup() {
   script/bootstrap
   make_zsh_default_shell
   install_oh_my_zsh
+  configure_oh_my_zsh
   echo "> Setup complete."
 }
 
