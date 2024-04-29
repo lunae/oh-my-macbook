@@ -39,17 +39,38 @@ install_oh_my_zsh() {
   fi
 }
 
-configure_oh_my_zsh() {
-  new_zsh_custom_path="\"$(cd "$(dirname "$0")/../oh-my-zsh" && pwd)\""
-
-  if [ ! -f ~/.zshrc ]; then
-    echo "=> ~/.zshrc does not exist. Skipping configuring Oh My Zsh."
-    return 1
+configure_git() {
+  if [ -f $HOME/.gitconfig ]; then
+    echo "Found .gitconfig. Backing up."
+    mv $HOME/.gitconfig $HOME/.gitconfig.$(date +%Y-%m-%d).bak
   fi
 
-  sed -i '.bak' -e "s#^.*\(ZSH_CUSTOM=\).*#\1$new_zsh_custom_path#" ~/.zshrc
+  if [ ! -L ~/.gitconfig ]; then
+    echo "=> Linking gitconfig."
+    ln -s $PWD/gitconfig $HOME/.gitconfig
+    echo "=> Linked gitconfig successfully."
+  else
+    echo "=> Git config already configured."
+  fi
+}
 
-  echo "=> ZSH_CUSTOM path updated successfully."
+configure_zshrc() {
+  if [ -f $HOME/.zshrc ]; then
+    echo "Found .zshrc. Backing up."
+    mv $HOME/.zshrc $HOME/.zshrc.$(date +%Y-%m-%d).bak
+  fi
+
+  if [ ! -L $HOME/.zshrc ]; then
+    echo "=> Configuring .zshrc."
+    ln -s $PWD/zshrc $HOME/.zshrc
+    echo "=> Configured .zshrc successfully."
+  else
+    echo "=> .zshrc already configured."
+  fi
+}
+
+instructions() {
+  echo "=> All set! Reload your shell: source $ZSH/oh-my-zsh.sh"
 }
 
 setup() {
@@ -57,7 +78,9 @@ setup() {
   script/bootstrap
   make_zsh_default_shell
   install_oh_my_zsh
-  configure_oh_my_zsh
+  configure_git
+  configure_zshrc
+  instructions
   echo "> Setup complete."
 }
 
