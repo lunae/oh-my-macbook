@@ -69,6 +69,11 @@ configure_zshrc() {
   fi
 }
 
+install_oh_my_zsh_plugins() {
+  # Add validation to avoid reinstalling this plugin
+  git clone https://github.com/aspirewit/zsh-nvm-auto-switch /Users/manny/Workspace/lunae/oh-my-macbook/oh-my-zsh/plugins/zsh-nvm-auto-switch
+}
+
 instructions() {
   echo "=> All set! Reload your shell: source $ZSH/oh-my-zsh.sh"
 }
@@ -80,6 +85,7 @@ setup() {
   install_oh_my_zsh
   configure_git
   configure_zshrc
+  install_oh_my_zsh_plugins
   instructions
   echo "> Setup complete."
 }

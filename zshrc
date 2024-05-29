@@ -26,7 +26,7 @@ ZSH_CUSTOM="/Users/manny/Workspace/lunae/oh-my-macbook/oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git_extras_setup homebrew_setup nvm_setup sdkman_setup zsh-nvm-auto-switch artemis)
+plugins=(git git_extras_setup homebrew_setup nvm_setup sdkman_setup zsh-nvm-auto-switch)
 
 source $ZSH/oh-my-zsh.sh
 

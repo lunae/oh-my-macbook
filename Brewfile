@@ -1,7 +1,6 @@
 tap 'sdkman/tap'
 
 brew 'awscli'
-brew 'gh'
 brew 'git'
 brew 'git-extras'
 brew 'httpie'
