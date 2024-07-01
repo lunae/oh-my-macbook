@@ -39,21 +39,6 @@ install_oh_my_zsh() {
   fi
 }
 
-configure_git() {
-  if [ -f $HOME/.gitconfig ]; then
-    echo "Found .gitconfig. Backing up."
-    mv $HOME/.gitconfig $HOME/.gitconfig.$(date +%Y-%m-%d).bak
-  fi
-
-  if [ ! -L ~/.gitconfig ]; then
-    echo "=> Linking gitconfig."
-    ln -s $PWD/gitconfig $HOME/.gitconfig
-    echo "=> Linked gitconfig successfully."
-  else
-    echo "=> Git config already configured."
-  fi
-}
-
 configure_zshrc() {
   if [ -f $HOME/.zshrc ]; then
     echo "Found .zshrc. Backing up."
@@ -83,7 +68,6 @@ setup() {
   script/bootstrap
   make_zsh_default_shell
   install_oh_my_zsh
-  configure_git
   configure_zshrc
   install_oh_my_zsh_plugins
   instructions
